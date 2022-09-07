@@ -11,17 +11,21 @@ int main(){
     sockfd=socket(AF_INET,SOCK_STREAM,0);
        
     bzero(&servaddr, sizeof(servaddr));
+
     serv_addr.sin_family=AF_INET;
-    serv_addr.sin_addr.s_addr=INADDR_ANY;
+    serv_addr.sin_addr.s_addr=htonl(INADDR_ANY);
     serv_addr.sin_port=htons(PORT);
        
     printf("\nStart");
        
     bind(sockfd,(struct sockaddr*)&serv_addr,sizeof(serv_addr));
+
     printf("\nListening...\n");
        
     listen(sockfd,5);
+
     len=sizeof(cliaddr);
+    
     newsockfd=accept(sockfd,(struct sockaddr*)&cliaddr,&len);
     printf("\nAccepted\n");
 
