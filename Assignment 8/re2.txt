@@ -1,0 +1,25 @@
++ Configure the Routed Port
+D1(config)# interface GigabitEthernet1/0/1
+D1(config-if)# description routed Port Link to R1
+D1(config-if)# no switchport
+D1(config-if)# ip address 10.10.10.2 255.255.255.0
+D1(config-if)# no shut
+D1(config-if)# exit
+
+
++ Enable Routing
+D1(config)# ip routing
+
++ Configure Routing
+D1(config)# router ospf 10
+D1(config-router)# network 192.168.10.0 0.0.0.255 area 0
+D1(config-router)# network 192.168.20.0 0.0.0.255 area 0
+D1(config-router)# network 10.10.10.0 0.0.0.3 area 0
+D1(config-router)# ^Z
+
++ Verify Routing
+D1# show ip route | begin Gateway
+
++ Verify Connectivity
+C:\Users\PC1> ping 10.20.20.254
+
